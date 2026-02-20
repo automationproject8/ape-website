@@ -129,23 +129,13 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Country badges */}
-          <div className="animate-fade-up delay-600 anim-init mt-12 flex flex-wrap gap-2">
-            {['DE', 'AT', 'IT', 'NL', 'IE', 'HU', 'RO'].map((c) => (
-              <span
-                key={c}
-                className="px-3 py-1 text-xs text-[#8fb3d4] border border-[#2d5a8e]/50 rounded tracking-widest"
-              >
-                {c}
-              </span>
-            ))}
-          </div>
+
         </div>
       </div>
 
       {/* Scroll indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 animate-fade-in delay-800 anim-init">
-        <span className="text-[#4a7aa8] text-[10px] tracking-[0.3em] uppercase">Scroll</span>
+        <span className="text-[#4a7aa8] text-[10px] tracking-[0.3em] uppercase"></span>
         <div className="w-px h-12 bg-gradient-to-b from-[#4a7aa8] to-transparent" />
       </div>
     </section>
