@@ -41,9 +41,19 @@ export default function BlogPage() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {articles.map((article) => (
               <Link key={article.slug} href={`/blog/${article.slug}`} className="group">
-                <article className="service-card h-full rounded-lg border border-[#2d5a8e]/30 p-7 flex flex-col relative"
+                <article className="service-card h-full rounded-lg border border-[#2d5a8e]/30 flex flex-col relative overflow-hidden"
                   style={{ background: 'linear-gradient(135deg, rgba(30,58,95,0.6), rgba(21,45,74,0.8))' }}>
 
+                  {/* Article image */}
+                  <div className="w-full h-48 overflow-hidden">
+                    <img
+                      src={article.image}
+                      alt={article.title}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    />
+                  </div>
+
+                  <div className="p-7 flex flex-col flex-1">
                   {/* Corner accent */}
                   <div className="absolute top-3 right-3 w-4 h-4 border-t border-r border-[#4a7aa8]/40" />
 
@@ -77,6 +87,7 @@ export default function BlogPage() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                       </svg>
                     </span>
+                  </div>
                   </div>
                 </article>
               </Link>

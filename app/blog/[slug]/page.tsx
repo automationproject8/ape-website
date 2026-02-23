@@ -97,6 +97,15 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
           <p className="text-[#8fb3d4] text-lg leading-relaxed font-light max-w-2xl">
             {article.excerpt}
           </p>
+
+          {/* Hero image */}
+          <div className="mt-10 rounded-lg overflow-hidden border border-[#2d5a8e]/30 h-72 md:h-96">
+            <img
+              src={article.image}
+              alt={article.title}
+              className="w-full h-full object-cover"
+            />
+          </div>
         </div>
       </section>
 

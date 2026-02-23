@@ -5,6 +5,7 @@ export interface Article {
   date: string
   readTime: string
   category: string
+  image: string
   content: string
 }
 
@@ -16,6 +17,7 @@ export const articles: Article[] = [
     date: 'February 10, 2026',
     readTime: '6 min read',
     category: 'Telecom',
+    image: '/fiber-optic.jpg',
     content: `
 ## The Fiber Revolution Is Here
 
@@ -67,6 +69,7 @@ If your organisation is planning a fiber rollout or needs a trusted subcontracto
     date: 'February 17, 2026',
     readTime: '7 min read',
     category: 'Telecom',
+    image: '/cell-tower.jpg',
     content: `
 ## Beyond the Hype: What 5G Actually Requires on the Ground
 
@@ -130,6 +133,7 @@ European 5G rollouts are far from complete. Coverage obligations, capacity densi
     date: 'February 21, 2026',
     readTime: '8 min read',
     category: 'Energy',
+    image: '/solar-farm.jpg',
     content: `
 ## The Infrastructure Behind the Energy Transition
 
