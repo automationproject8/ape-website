@@ -28,13 +28,17 @@ export default function Footer() {
             </p>
           </div>
 
-          {/* Services quick links */}
           <div>
-            <div className="text-[#8fb3d4] text-xs tracking-[0.2em] uppercase font-medium mb-4">Services</div>
+            <div className="text-[#8fb3d4] text-xs tracking-[0.2em] uppercase font-medium mb-4">Navigation</div>
             <ul className="space-y-2">
-              {['Telecom Network Construction', 'Power Networks', 'PV Park Construction', 'BESS', 'Steel Structures', 'AI Solutions'].map((s) => (
-                <li key={s}>
-                  <a href="#services" className="text-[#4a7aa8] text-xs hover:text-[#8fb3d4] transition-colors">{s}</a>
+              {[
+                { label: 'About', href: '/#about' },
+                { label: 'Services', href: '/#services' },
+                { label: 'Blog', href: '/blog' },
+                { label: 'Contact', href: '/#contact' },
+              ].map((item) => (
+                <li key={item.label}>
+                  <a href={item.href} className="text-[#4a7aa8] text-xs hover:text-[#8fb3d4] transition-colors">{item.label}</a>
                 </li>
               ))}
             </ul>

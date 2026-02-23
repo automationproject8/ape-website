@@ -11,7 +11,7 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const links = ['About', 'Services', 'Contact']
+  const links = ['About', 'Services', 'Blog', 'Contact']
 
   return (
     <nav
@@ -44,7 +44,7 @@ export default function Navbar() {
           {links.map((link) => (
             <a
               key={link}
-              href={`#${link.toLowerCase()}`}
+              href={link === 'Blog' ? '/blog' : `/#${link.toLowerCase()}`}
               className="nav-link text-[#8fb3d4] hover:text-white text-sm tracking-[0.15em] uppercase font-medium transition-colors"
             >
               {link}
@@ -79,7 +79,7 @@ export default function Navbar() {
           {links.map((link) => (
             <a
               key={link}
-              href={`#${link.toLowerCase()}`}
+              href={link === 'Blog' ? '/blog' : `/#${link.toLowerCase()}`}
               className="text-[#8fb3d4] hover:text-white text-sm tracking-[0.15em] uppercase font-medium transition-colors"
               onClick={() => setMenuOpen(false)}
             >
