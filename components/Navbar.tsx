@@ -25,7 +25,7 @@ export default function Navbar() {
         {/* Logo */}
         <a href="/" className="flex items-center">
           <img
-            src="/logo3-ape.png"
+            src="/logo5-ape.png"
             alt="Advanced Pro Engineering"
             className="h-12 w-auto object-contain"
           />
