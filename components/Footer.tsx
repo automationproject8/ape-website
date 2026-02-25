@@ -10,7 +10,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center gap-3 mb-4">
               <img
-                src="/logo1-ape.png"
+                src="/logo2-ape.png"
                 alt="Advanced Pro Engineering"
                 className="h-12 w-auto object-contain"
               />
