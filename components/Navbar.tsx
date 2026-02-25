@@ -23,20 +23,12 @@ export default function Navbar() {
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="relative w-10 h-10">
-            <svg viewBox="0 0 60 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-10 h-10">
-              <circle cx="30" cy="30" r="28" stroke="#4a7aa8" strokeWidth="1.5" opacity="0.5" />
-              <circle cx="30" cy="30" r="20" stroke="#4a7aa8" strokeWidth="1.5" opacity="0.4" />
-              <circle cx="30" cy="30" r="12" stroke="#4a7aa8" strokeWidth="1.5" opacity="0.3" />
-              <path d="M30 2 L30 58M2 30 L58 30M8 8 L52 52M52 8 L8 52" stroke="#8fb3d4" strokeWidth="0.8" opacity="0.4" />
-              <circle cx="30" cy="30" r="4" fill="#8fb3d4" />
-            </svg>
-          </div>
-          <div>
-            <div className="font-heading text-white text-xl font-700 tracking-widest leading-none" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700 }}>APE</div>
-            <div className="text-[#8fb3d4] text-[9px] tracking-[0.2em] uppercase leading-none mt-0.5">Advanced Pro Engineering</div>
-          </div>
+        <a href="/" className="flex items-center">
+          <img
+            src="/logo1-ape.png"
+            alt="Advanced Pro Engineering"
+            className="h-12 w-auto object-contain"
+          />
         </a>
 
         {/* Desktop nav */}
