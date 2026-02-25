@@ -1,4 +1,4 @@
-import { articles, getArticleBySlug } from '@/lib/blog'
+import { getArticles, getArticleBySlug } from '@/lib/blog'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import Link from 'next/link'
@@ -6,7 +6,7 @@ import { notFound } from 'next/navigation'
 import type { Metadata } from 'next'
 
 export async function generateStaticParams() {
-  return articles.map((a) => ({ slug: a.slug }))
+  return getArticles().map((a) => ({ slug: a.slug }))
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
@@ -62,7 +62,7 @@ export default function ArticlePage({ params }: { params: { slug: string } }) {
   const article = getArticleBySlug(params.slug)
   if (!article) notFound()
 
-  const otherArticles = articles.filter((a) => a.slug !== article.slug).slice(0, 2)
+  const otherArticles = getArticles().filter((a) => a.slug !== article.slug).slice(0, 2)
 
   return (
     <main>

@@ -1,3 +1,6 @@
+import { readFileSync } from 'fs'
+import { join } from 'path'
+
 export interface Article {
   slug: string
   title: string
@@ -7,6 +10,19 @@ export interface Article {
   category: string
   image: string
   content: string
+}
+
+export function getArticles(): Article[] {
+  try {
+    const data = readFileSync(join(process.cwd(), 'data', 'articles.json'), 'utf-8')
+    return JSON.parse(data)
+  } catch {
+    return []
+  }
+}
+
+export function getArticleBySlug(slug: string): Article | undefined {
+  return getArticles().find((a) => a.slug === slug)
 }
 
 export const articles: Article[] = [
@@ -69,7 +85,7 @@ If your organisation is planning a fiber rollout or needs a trusted subcontracto
     date: 'February 17, 2026',
     readTime: '7 min read',
     category: 'Telecom',
-    image: '/cell-tower.jpg',
+    image: '/5g-tower.jpg',
     content: `
 ## Beyond the Hype: What 5G Actually Requires on the Ground
 

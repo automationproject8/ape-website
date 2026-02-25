@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { articles } from '@/lib/blog'
+import { getArticles } from '@/lib/blog'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
 import type { Metadata } from 'next'
@@ -10,6 +10,7 @@ export const metadata: Metadata = {
 }
 
 export default function BlogPage() {
+  const articles = getArticles()
   return (
     <main>
       <Navbar />
