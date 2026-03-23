@@ -5,6 +5,8 @@ export default function Contact() {
   const sectionRef = useRef<HTMLDivElement>(null)
   const [form, setForm] = useState({ name: '', email: '', company: '', message: '' })
   const [sent, setSent] = useState(false)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -17,17 +19,34 @@ export default function Contact() {
     return () => observer.disconnect()
   }, [])
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    // In production, hook this up to an API route or email service
-    setSent(true)
+    setLoading(true)
+    setError('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      })
+
+      if (res.ok) {
+        setSent(true)
+      } else {
+        setError('Something went wrong. Please try again or email us directly.')
+      }
+    } catch {
+      setError('Something went wrong. Please try again or email us directly.')
+    } finally {
+      setLoading(false)
+    }
   }
 
   return (
     <section id="contact" ref={sectionRef} className="relative py-32 overflow-hidden" style={{ background: 'linear-gradient(180deg, #0d1f35 0%, #152d4a 100%)' }}>
       <div className="absolute inset-0 grid-pattern opacity-15" />
 
-      {/* Decorative shapes */}
       <div className="absolute top-20 right-10 w-32 h-32 border border-[#2d5a8e]/20 rotate-45 animate-pulse-slow" />
       <div className="absolute bottom-20 left-10 w-20 h-20 border border-[#2d5a8e]/15 rotate-12 animate-pulse-slow delay-500" />
 
@@ -75,11 +94,7 @@ export default function Contact() {
                   href: '#',
                 },
               ].map((item, i) => (
-                <a
-                  key={i}
-                  href={item.href}
-                  className="flex items-center gap-4 group"
-                >
+                <a key={i} href={item.href} className="flex items-center gap-4 group">
                   <div className="w-10 h-10 rounded flex items-center justify-center border border-[#2d5a8e] text-[#4a7aa8] group-hover:border-[#4a7aa8] group-hover:text-[#8fb3d4] transition-all duration-300"
                     style={{ background: 'rgba(45,90,142,0.1)' }}>
                     {item.icon}
@@ -105,12 +120,18 @@ export default function Contact() {
               {sent ? (
                 <div className="text-center py-12">
                   <div className="text-4xl mb-4">✅</div>
-                  <h3 className="font-heading text-white text-2xl mb-2" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700 }}>Message Sent</h3>
-                  <p className="text-[#8fb3d4]">We'll get back to you shortly.</p>
+                  <h3 className="font-heading text-white text-2xl mb-2"
+                    style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700 }}>
+                    Message Sent!
+                  </h3>
+                  <p className="text-[#8fb3d4]">We'll get back to you within 1–2 business days.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
-                  <h3 className="font-heading text-white text-2xl mb-6" style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700 }}>Send a Message</h3>
+                  <h3 className="font-heading text-white text-2xl mb-6"
+                    style={{ fontFamily: "'Barlow Condensed', sans-serif", fontWeight: 700 }}>
+                    Send a Message
+                  </h3>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                     {[
@@ -122,7 +143,6 @@ export default function Contact() {
                         <input
                           type={f.type}
                           placeholder={f.placeholder}
-                          required
                           className="w-full bg-[#0d1f35]/60 border border-[#2d5a8e]/50 rounded px-4 py-3 text-white text-sm placeholder-[#2d5a8e] focus:outline-none focus:border-[#4a7aa8] transition-colors"
                           value={form[f.id as keyof typeof form]}
                           onChange={(e) => setForm({ ...form, [f.id]: e.target.value })}
@@ -132,7 +152,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-[#4a7aa8] text-xs tracking-widest uppercase block mb-2">Email</label>
+                    <label className="text-[#4a7aa8] text-xs tracking-widest uppercase block mb-2">Email *</label>
                     <input
                       type="email"
                       placeholder="you@company.com"
@@ -144,7 +164,7 @@ export default function Contact() {
                   </div>
 
                   <div>
-                    <label className="text-[#4a7aa8] text-xs tracking-widest uppercase block mb-2">Message</label>
+                    <label className="text-[#4a7aa8] text-xs tracking-widest uppercase block mb-2">Message *</label>
                     <textarea
                       rows={5}
                       placeholder="Tell us about your project or requirements..."
@@ -155,11 +175,18 @@ export default function Contact() {
                     />
                   </div>
 
+                  {error && (
+                    <div className="text-red-400 text-sm bg-red-900/20 border border-red-800/30 rounded px-4 py-3">
+                      {error}
+                    </div>
+                  )}
+
                   <button
                     type="submit"
-                    className="btn-primary w-full py-3.5 rounded text-white font-medium tracking-[0.1em] uppercase text-sm"
+                    disabled={loading}
+                    className="btn-primary w-full py-3.5 rounded text-white font-medium tracking-[0.1em] uppercase text-sm disabled:opacity-50"
                   >
-                    <span>Send Message</span>
+                    <span>{loading ? 'Sending...' : 'Send Message'}</span>
                   </button>
                 </form>
               )}
