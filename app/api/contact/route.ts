@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
 
     await resend.emails.send({
       from: 'APE Website <office@advancedproengineering.com>',
-      to: 'automation.project8@gmail.com',
+      to: 'office@advancedproengineering.com',
       replyTo: email,
       subject: `New Contact Form Message from ${name}`,
       html: `
